@@ -2,7 +2,8 @@
 # pci_eerie: implement a pcie_7x board top with pci_eerie in place of PCIE_2_1
 # usage: vivado -mode batch -source vivado_impl.tcl -tclargs <board> [part]
 #   pcie_7x sources: $PCIE_7X if set, else the ext/pcie_7x submodule, else ../pcie_7x next to this repo
-#   board: ac7100b      Alinx AC7100B (xc7a100t, GTP), Gen1   pcie_7x_top_aximm
+#   board: ac7100b      Alinx AC7100B (xc7a100t, GTP), Gen1   pcie_7x_top_aximm (writes top.bit)
+#          ac7100b_msi  same board, Gen1, pcie_7x's MSI demo  pcie_7x_top_aximm_msi (writes top.bit)
 #          ac7100b_gen2 same top with ENABLE_GEN2=1
 #          hvs_k70t     HVS K70T (xc7k70t, GTX), Gen2         pcie_7x_top_aximm_hvs_70t
 #          ypcb_k480t   YPCB K480T (xc7k480t, GTX), Gen2      pcie_7x_top_aximm_ypcb_480t (writes top.bit)
@@ -22,7 +23,10 @@ set generics {}
 set bitstream 0
 switch $board {
   ac7100b      { set part xc7a100tfgg484-1; set top pcie_7x_top_aximm; lappend files $src/pipe_wrapper.v
-                 set pins $here/ac7100b_pins.xdc }
+                 set pins $here/ac7100b_pins.xdc; set bitstream 1 }
+  ac7100b_msi  { set part xc7a100tfgg484-1; set top pcie_7x_top_aximm_msi; lappend files $src/pipe_wrapper.v
+                 lappend files $src/aximm-minimal/pcie_7x_top_aximm_msi.v $src/aximm-minimal/axil_minimum_msi.v
+                 set pins $here/ac7100b_pins.xdc; set bitstream 1 }
   ac7100b_gen2 { set part xc7a100tfgg484-2; set top pcie_7x_top_aximm; lappend files $src/pipe_wrapper.v
                  set pins $here/ac7100b_pins.xdc; set generics {ENABLE_GEN2=1} }
   hvs_k70t     { set part xc7k70tfbg676-1; set top pcie_7x_top_aximm_hvs_70t

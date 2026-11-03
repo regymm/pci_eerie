@@ -5,6 +5,7 @@
 # pcie_7x comes from the ext/pcie_7x submodule (PCIE_7X=<path inside the container> to override).
 # The nextpnr chip database is generated into syn/chipdb on the first run (CHIPDB to override).
 #   BOARD=ac7100b     Alinx AC7100B (xc7a100t, GTP), Gen1   (default)
+#   BOARD=ac7100b_msi same board, Gen1, pcie_7x's MSI demo top (pcie_7x_top_aximm_msi)
 #   BOARD=ypcb_k480t  YPCB K480T (xc7k480t, GTX), Gen1, top syn/top_ypcb_k480t.v
 #     regymm/openxc7:timecardflex's prjxray-db has no frame addresses for the xc7k480t GT tiles, so
 #     run the bitstream steps (target .../top.bit) in an image whose db has them, e.g.
@@ -23,6 +24,13 @@ TOP      := top_ypcb_k480t
 BUILDDIR ?= syn/build_openxc7_ypcb_k480t
 XDC      := syn/ypcb_k480t_pins.xdc
 BOARD_SRC := $(SRC)/pipe_wrapper_gtx.v syn/top_ypcb_k480t.v
+else ifeq ($(BOARD),ac7100b_msi)
+CHIPFAM  := artix7
+PART     := xc7a100tfgg484-1
+TOP      := pcie_7x_top_aximm_msi
+BUILDDIR ?= syn/build_openxc7_ac7100b_msi
+XDC      := $(PCIE_7X)/pcie_7x_ac7100b.xdc
+BOARD_SRC := $(SRC)/pipe_wrapper.v $(SRC)/aximm-minimal/pcie_7x_top_aximm_msi.v $(SRC)/aximm-minimal/axil_minimum_msi.v
 else
 CHIPFAM  := artix7
 PART     := xc7a100tfgg484-1
