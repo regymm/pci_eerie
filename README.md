@@ -49,6 +49,22 @@ A Gen2 openXC7 build (`-chparam ENABLE_GEN2 1`, `--freq 250`) does not work: nex
 for the 250 MHz PIPE clock and 111.8 MHz for the 125 MHz user clock, and on the card the link trains at
 2.5 GT/s but the data link layer never comes up, so the device does not enumerate.
 
+On an Artix-7 board (Meta Time Card with an AC7100B module, xc7a100t GTP, Gen1, same host,
+`syn/ac7100b_pins.xdc`): on this card the link only comes up after a host PERST# (the PCIE_2_1
+build behaves the same), so each bitstream was loaded over JTAG and the host rebooted.
+
+* Vivado, `vivado_impl.tcl ac7100b`: enumerates at 2.5 GT/s x1 and passes the BAR0 test
+  (300 x 256 DW, then 10 x 256 DW after each of 5 further reboots, 3 of them with a fresh JTAG
+  load; no AER errors). In one earlier boot every BAR0 read returned all-ones; it did not
+  happen again in the following 6 boots, and the cause is not known. A single all-ones read
+  shortly after boot also shows up occasionally with the PCIE_2_1 build on this host.
+* Vivado, `vivado_impl.tcl ac7100b_msi` (pcie_7x's MSI demo top, which fires an MSI about once a
+  second): with pcie_7x's `pcie_7x_msi` demo driver every MSI is received and handled, the same
+  as with the PCIE_2_1 build of that demo.
+* openXC7, `Makefile.openxc7` (default `BOARD=ac7100b`, nextpnr estimate 127.9 MHz PIPE clock):
+  3 of 3 program/reboot cycles enumerate and pass 50 x 256 DW. `BOARD=ac7100b_msi` (134.6 MHz):
+  10 MSIs in 10 s received and handled.
+
 Timing (Vivado 2023.2, the pcie_7x board top with pci_eerie, `syn/vivado_impl.tcl`):
 
 | Board / part                           | PIPE clock            | user clock          |
@@ -66,12 +82,11 @@ violations, because that clock can never be selected there. Artix-7 -1 GTPs are 
 3.75 Gb/s (RXUSRCLK minimum period 5.33 ns), so Gen2 needs a -2/-3 Artix-7 or a Kintex-7,
 whichever core is used.
 
-openXC7 (yosys + nextpnr-xilinx, `syn/Makefile.openxc7`): the AC7100B design with
-pci_eerie synthesizes, places, routes and produces a bitstream (about 6.1k LUTs for the whole
-design). nextpnr-xilinx's post-placement estimate is 112.7 MHz for the PIPE clock, below the
-125 MHz a 2.5 GT/s link needs. Its 7-series delay model is approximate and this build prints
-no post-route critical path, so whether an openXC7 bitstream holds 125 MHz in hardware is
-still open. The Vivado numbers above are the reliable ones.
+openXC7 (yosys + nextpnr-xilinx, `syn/Makefile.openxc7`): the AC7100B design with pci_eerie
+synthesizes, places, routes and produces a bitstream (about 6.1k LUTs for the whole design).
+nextpnr-xilinx's 7-series delay model is approximate (its PIPE clock estimates are 128-135 MHz on
+the AC7100B and 132 MHz on the K480T for the 125 MHz a 2.5 GT/s link needs); the Gen1 openXC7
+bitstreams work on both boards (above). The Vivado numbers above are the reliable ones.
 
 Resources (Vivado, x1 Gen2 build): pci_eerie is 3.4k LUTs (incl. 318 as LUTRAM), 3.1k FFs and
 1 BRAM36, plus the two MIM BRAM buffers that `pcie_block` already instantiates (4 BRAM36 at
