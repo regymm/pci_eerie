@@ -1,0 +1,3 @@
+[submodule "ext/pcie_7x"]
+	path = ext/pcie_7x
+	url = https://github.com/regymm/pcie_7x.git

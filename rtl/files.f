@@ -1,0 +1,10 @@
+eerie_sync.v
+eerie_async_fifo.v
+eerie_pl_rx.v
+eerie_pl_tx.v
+eerie_ltssm.v
+eerie_dll.v
+eerie_cfg.v
+eerie_tl_rx.v
+eerie_tl_tx.v
+pci_eerie.v

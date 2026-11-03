@@ -1,0 +1,298 @@
+      27.929 us TX TS1 link=PAD lane=PAD nfts=ff rate=02 ctl=00
+      32.689 us TX    (previous x74 more)
+      32.689 us TX SKP x3
+      32.745 us TX TS1 link=PAD lane=PAD nfts=ff rate=02 ctl=00
+      37.505 us TX    (previous x74 more)
+      37.505 us TX SKP x3
+      37.561 us TX TS1 link=PAD lane=PAD nfts=ff rate=02 ctl=00
+      42.321 us TX    (previous x74 more)
+      42.321 us TX SKP x3
+      42.377 us TX TS1 link=PAD lane=PAD nfts=ff rate=02 ctl=00
+      47.137 us TX    (previous x74 more)
+      47.137 us TX SKP x3
+      47.193 us TX TS1 link=PAD lane=PAD nfts=ff rate=02 ctl=00
+      51.889 us TX    (previous x73 more)
+      51.889 us TX SKP x3
+      51.945 us TX TS1 link=PAD lane=PAD nfts=ff rate=02 ctl=00
+      52.609 us RX idle? b5
+      52.609 us RX idle? 5d
+      52.617 us RX idle? 8a
+      52.617 us RX idle? 5e
+      52.625 us RX idle? f8
+      52.689 us RX TS1 link=PAD lane=PAD nfts=ff rate=02 ctl=00
+      53.289 us TX    (previous x20 more)
+      53.289 us TX TS2 link=PAD lane=PAD nfts=ff rate=02 ctl=00
+      53.521 us RX    (previous x12 more)
+      53.521 us RX TS2 link=PAD lane=PAD nfts=ff rate=02 ctl=00
+      54.697 us TX    (previous x21 more)
+      54.697 us TX TS1 link=PAD lane=PAD nfts=ff rate=02 ctl=00
+      54.865 us RX    (previous x20 more)
+      54.865 us RX TS1 link=00 lane=PAD nfts=ff rate=02 ctl=00
+      55.081 us TX    (previous x5 more)
+      55.081 us TX TS1 link=00 lane=PAD nfts=ff rate=02 ctl=00
+      56.273 us RX    (previous x21 more)
+      56.273 us RX TS1 link=00 lane=00 nfts=ff rate=02 ctl=00
+      56.489 us TX    (previous x21 more)
+      56.489 us TX TS1 link=00 lane=00 nfts=ff rate=02 ctl=00
+      56.545 us RX    (previous x4 more)
+      56.545 us RX SKP x3
+      56.609 us RX TS1 link=00 lane=00 nfts=ff rate=02 ctl=00
+      56.705 us TX    (previous x3 more)
+      56.705 us TX SKP x3
+      56.761 us TX TS1 link=00 lane=00 nfts=ff rate=02 ctl=00
+      57.633 us RX    (previous x15 more)
+      57.633 us RX TS2 link=00 lane=00 nfts=ff rate=42 ctl=00
+      57.977 us TX    (previous x18 more)
+      57.977 us TX TS2 link=00 lane=00 nfts=ff rate=42 ctl=00
+      59.649 us TX DLLP InitFC1-P hdr=4 data=32 crc=ok [40010020f897]
+      59.681 us TX DLLP InitFC1-NP hdr=4 data=8 crc=ok [500100081919]
+      59.713 us TX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      59.745 us TX DLLP InitFC1-P hdr=4 data=32 crc=ok [40010020f897]
+      59.777 us TX DLLP InitFC1-NP hdr=4 data=8 crc=ok [500100081919]
+      59.809 us TX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      59.841 us TX DLLP InitFC1-P hdr=4 data=32 crc=ok [40010020f897]
+      59.873 us TX DLLP InitFC1-NP hdr=4 data=8 crc=ok [500100081919]
+      59.881 us RX DLLP InitFC1-P hdr=32 data=437 crc=ok [400801b565fe]
+      59.905 us TX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      59.937 us TX DLLP InitFC1-P hdr=4 data=32 crc=ok [40010020f897]
+      59.945 us RX DLLP InitFC1-NP hdr=12 data=24 crc=ok [50030018e15e]
+      59.969 us TX DLLP InitFC1-NP hdr=4 data=8 crc=ok [500100081919]
+      60.001 us TX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      60.009 us RX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      60.033 us TX DLLP InitFC1-P hdr=4 data=32 crc=ok [40010020f897]
+      60.065 us TX DLLP InitFC1-NP hdr=4 data=8 crc=ok [500100081919]
+      60.073 us RX DLLP InitFC1-P hdr=32 data=437 crc=ok [400801b565fe]
+      60.097 us TX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      60.129 us TX DLLP InitFC1-P hdr=4 data=32 crc=ok [40010020f897]
+      60.137 us RX DLLP InitFC1-NP hdr=12 data=24 crc=ok [50030018e15e]
+      60.161 us TX DLLP InitFC1-NP hdr=4 data=8 crc=ok [500100081919]
+      60.193 us TX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      60.201 us RX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      60.225 us TX DLLP InitFC1-P hdr=4 data=32 crc=ok [40010020f897]
+      60.257 us TX DLLP InitFC1-NP hdr=4 data=8 crc=ok [500100081919]
+      60.265 us RX DLLP InitFC1-P hdr=32 data=437 crc=ok [400801b565fe]
+      60.289 us TX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      60.321 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      60.329 us RX DLLP InitFC1-NP hdr=12 data=24 crc=ok [50030018e15e]
+      60.353 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      60.385 us TX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      60.393 us RX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      60.417 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      60.449 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      60.457 us RX DLLP InitFC1-P hdr=32 data=437 crc=ok [400801b565fe]
+      60.481 us TX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      60.513 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      60.521 us RX DLLP InitFC1-NP hdr=12 data=24 crc=ok [50030018e15e]
+      60.545 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      60.577 us TX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      60.585 us RX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      60.609 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      60.641 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      60.649 us RX DLLP InitFC1-P hdr=32 data=437 crc=ok [400801b565fe]
+      60.673 us TX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      60.705 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      60.713 us RX DLLP InitFC1-NP hdr=12 data=24 crc=ok [50030018e15e]
+      60.737 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      60.769 us TX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      60.777 us RX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      60.801 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      60.833 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      60.841 us RX DLLP InitFC1-P hdr=32 data=437 crc=ok [400801b565fe]
+      60.865 us TX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      60.897 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      60.905 us RX DLLP InitFC1-NP hdr=12 data=24 crc=ok [50030018e15e]
+      60.929 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      60.961 us TX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      60.969 us RX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      60.993 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      61.025 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      61.033 us RX DLLP InitFC1-P hdr=32 data=437 crc=ok [400801b565fe]
+      61.057 us TX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      61.089 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      61.097 us RX DLLP InitFC1-NP hdr=12 data=24 crc=ok [50030018e15e]
+      61.121 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      61.153 us TX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      61.161 us RX DLLP InitFC1-Cpl hdr=0 data=0 crc=ok [60000000d892]
+      61.185 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      61.217 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      61.225 us RX DLLP InitFC2-P hdr=32 data=437 crc=ok [c00801b51f81]
+      61.249 us TX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      61.281 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      61.289 us RX DLLP InitFC2-NP hdr=12 data=24 crc=ok [d00300189b21]
+      61.313 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      61.345 us TX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      61.353 us RX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      61.377 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      61.409 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      61.417 us RX DLLP InitFC2-P hdr=32 data=437 crc=ok [c00801b51f81]
+      61.441 us TX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      61.481 us RX DLLP InitFC2-NP hdr=12 data=24 crc=ok [d00300189b21]
+      61.489 us TX    (previous x16 more)
+      61.489 us TX SKP x3
+      61.489 us TX DLLP InitFC2-P hdr=4 data=32 crc=ok [c001002082e8]
+      61.521 us TX DLLP InitFC2-NP hdr=4 data=8 crc=ok [d00100086366]
+      61.545 us RX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      61.609 us RX DLLP InitFC2-P hdr=32 data=437 crc=ok [c00801b51f81]
+      61.673 us RX DLLP InitFC2-NP hdr=12 data=24 crc=ok [d00300189b21]
+      61.737 us RX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      61.769 us RX TLP seq=0 lcrc=ok CfgRd0 len=1 hdr=04000001 01af000f 01a00070
+      61.849 us RX DLLP InitFC2-P hdr=32 data=437 crc=ok [c00801b51f81]
+      61.881 us RX DLLP InitFC2-NP hdr=12 data=24 crc=ok [d00300189b21]
+      61.945 us RX DLLP InitFC2-Cpl hdr=0 data=0 crc=ok [e0000000a2ed]
+      62.065 us TX DLLP ACK seq=0 crc=ok [00000000b362]
+      62.073 us RX DLLP UpdateFC-P hdr=32 data=437 crc=ok [800801b5a2be]
+      62.137 us RX DLLP UpdateFC-NP hdr=12 data=24 crc=ok [90030018261e]
+      62.161 us TX DLLP UpdateFC-NP hdr=5 data=8 crc=ok [900140083237]
+      62.393 us RX    (previous x29 more)
+      62.393 us RX SKP x3
+      62.513 us TX TLP seq=0 lcrc=ok CplD len=1 hdr=4a000001 00000004 01af0000 00001110
+      63.417 us RX DLLP ACK seq=0 crc=ok [00000000b362]
+      69.369 us RX TLP seq=1 lcrc=ok CfgRd0 len=1 hdr=04000001 01af000f 01a00000
+      69.665 us TX DLLP ACK seq=1 crc=ok [000000011279]
+      69.761 us TX DLLP UpdateFC-NP hdr=6 data=8 crc=ok [900180080684]
+      70.113 us TX TLP seq=1 lcrc=ok CplD len=1 hdr=4a000001 00000004 01af0000 ee109999
+      70.985 us RX DLLP ACK seq=1 crc=ok [000000011279]
+      77.417 us RX TLP seq=2 lcrc=ok CfgRd0 len=1 hdr=04000001 01af000f 01a00064
+      77.713 us TX DLLP ACK seq=2 crc=ok [00000002f155]
+      77.809 us TX DLLP UpdateFC-NP hdr=7 data=8 crc=ok [9001c008eaea]
+      78.161 us TX TLP seq=2 lcrc=ok CplD len=1 hdr=4a000001 00000004 01af0000 018e0000
+      79.065 us RX DLLP ACK seq=2 crc=ok [00000002f155]
+      85.465 us RX TLP seq=3 lcrc=ok CfgWr0 len=1 hdr=44000001 01af000f 01a00010 ffffffff
+      85.489 us TX DLLP UpdateFC-P hdr=4 data=32 crc=ok [800100203fd7]
+      85.521 us TX DLLP UpdateFC-NP hdr=7 data=8 crc=ok [9001c008eaea]
+      85.777 us TX DLLP ACK seq=3 crc=ok [00000003504e]
+      85.873 us TX DLLP UpdateFC-NP hdr=8 data=9 crc=ok [9002000972e1]
+      86.225 us TX TLP seq=3 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0000
+      87.129 us RX TLP seq=4 lcrc=ok CfgRd0 len=1 hdr=04000001 01af010f 01a00010
+      87.209 us RX DLLP ACK seq=3 crc=ok [00000003504e]
+      87.425 us TX DLLP ACK seq=4 crc=ok [00000004370c]
+      87.521 us TX DLLP UpdateFC-NP hdr=9 data=9 crc=ok [900240099e8f]
+      87.873 us TX TLP seq=4 lcrc=ok CplD len=1 hdr=4a000001 01a00004 01af0100 00f0ffff
+      88.745 us RX DLLP ACK seq=4 crc=ok [00000004370c]
+      94.825 us RX DLLP UpdateFC-P hdr=32 data=437 crc=ok [800801b5a2be]
+      94.889 us RX DLLP UpdateFC-NP hdr=12 data=24 crc=ok [90030018261e]
+      95.145 us RX TLP seq=5 lcrc=ok CfgWr0 len=1 hdr=44000001 01af020f 01a00014 ffffffff
+      95.457 us TX DLLP ACK seq=5 crc=ok [000000059617]
+      95.553 us TX DLLP UpdateFC-NP hdr=10 data=10 crc=ok [9002800a4910]
+      95.905 us TX TLP seq=5 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0200
+      96.777 us RX DLLP ACK seq=5 crc=ok [000000059617]
+      96.809 us RX TLP seq=6 lcrc=ok CfgRd0 len=1 hdr=04000001 01af030f 01a00014
+      97.105 us TX DLLP ACK seq=6 crc=ok [00000006753b]
+      97.201 us TX DLLP UpdateFC-NP hdr=11 data=10 crc=ok [9002c00aa57e]
+      97.553 us TX TLP seq=6 lcrc=ok CplD len=1 hdr=4a000001 01a00004 01af0300 00000000
+      98.457 us RX DLLP ACK seq=6 crc=ok [00000006753b]
+     104.857 us RX TLP seq=7 lcrc=ok CfgWr0 len=1 hdr=44000001 01af040f 01a00018 ffffffff
+     105.169 us TX DLLP ACK seq=7 crc=ok [00000007d420]
+     105.265 us TX DLLP UpdateFC-NP hdr=12 data=11 crc=ok [9003000bc428]
+     105.617 us TX TLP seq=7 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0400
+     106.521 us RX TLP seq=8 lcrc=ok CfgRd0 len=1 hdr=04000001 01af050f 01a00018
+     106.601 us RX DLLP ACK seq=7 crc=ok [00000007d420]
+     106.817 us TX DLLP ACK seq=8 crc=ok [00000008bbbf]
+     106.913 us TX DLLP UpdateFC-NP hdr=13 data=11 crc=ok [9003400b2846]
+     107.265 us TX TLP seq=8 lcrc=ok CplD len=1 hdr=4a000001 01a00004 01af0500 00000000
+     108.137 us RX DLLP ACK seq=8 crc=ok [00000008bbbf]
+     109.505 us TX DLLP UpdateFC-P hdr=4 data=32 crc=ok [800100203fd7]
+     109.537 us TX DLLP UpdateFC-NP hdr=13 data=11 crc=ok [9003400b2846]
+     114.537 us RX TLP seq=9 lcrc=ok CfgWr0 len=1 hdr=44000001 01af060f 01a0001c ffffffff
+     114.849 us TX DLLP ACK seq=9 crc=ok [000000091aa4]
+     114.945 us TX DLLP UpdateFC-NP hdr=14 data=12 crc=ok [9003800c7bb7]
+     115.297 us TX TLP seq=9 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0600
+     116.169 us RX DLLP ACK seq=9 crc=ok [000000091aa4]
+     116.201 us RX TLP seq=10 lcrc=ok CfgRd0 len=1 hdr=04000001 01af070f 01a0001c
+     116.497 us TX DLLP ACK seq=10 crc=ok [0000000af988]
+     116.593 us TX DLLP UpdateFC-NP hdr=15 data=12 crc=ok [9003c00c97d9]
+     116.945 us TX TLP seq=10 lcrc=ok CplD len=1 hdr=4a000001 01a00004 01af0700 00000000
+     117.849 us RX DLLP ACK seq=10 crc=ok [0000000af988]
+     124.249 us RX TLP seq=11 lcrc=ok CfgWr0 len=1 hdr=44000001 01af080f 01a00020 ffffffff
+     124.561 us TX DLLP ACK seq=11 crc=ok [0000000b5893]
+     124.657 us TX DLLP UpdateFC-NP hdr=16 data=13 crc=ok [9004000dfd69]
+     125.009 us TX TLP seq=11 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0800
+     125.913 us RX TLP seq=12 lcrc=ok CfgRd0 len=1 hdr=04000001 01af090f 01a00020
+     125.993 us RX DLLP ACK seq=11 crc=ok [0000000b5893]
+     126.209 us TX DLLP ACK seq=12 crc=ok [0000000c3fd1]
+     126.305 us TX DLLP UpdateFC-NP hdr=17 data=13 crc=ok [9004400d1107]
+     126.657 us TX TLP seq=12 lcrc=ok CplD len=1 hdr=4a000001 01a00004 01af0900 00000000
+     127.529 us RX DLLP ACK seq=12 crc=ok [0000000c3fd1]
+     127.593 us RX DLLP UpdateFC-NP hdr=12 data=24 crc=ok [90030018261e]
+     127.657 us RX DLLP UpdateFC-P hdr=32 data=437 crc=ok [800801b5a2be]
+     133.521 us TX DLLP UpdateFC-P hdr=4 data=32 crc=ok [800100203fd7]
+     133.553 us TX DLLP UpdateFC-NP hdr=17 data=13 crc=ok [9004400d1107]
+     133.929 us RX TLP seq=13 lcrc=ok CfgWr0 len=1 hdr=44000001 01af0a0f 01a00024 ffffffff
+     134.241 us TX DLLP ACK seq=13 crc=ok [0000000d9eca]
+     134.337 us TX DLLP UpdateFC-NP hdr=18 data=14 crc=ok [9004800ec698]
+     134.689 us TX TLP seq=13 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0a00
+     135.561 us RX DLLP ACK seq=13 crc=ok [0000000d9eca]
+     135.593 us RX TLP seq=14 lcrc=ok CfgRd0 len=1 hdr=04000001 01af0b0f 01a00024
+     135.889 us TX DLLP ACK seq=14 crc=ok [0000000e7de6]
+     135.985 us TX DLLP UpdateFC-NP hdr=19 data=14 crc=ok [9004c00e2af6]
+     136.337 us TX TLP seq=14 lcrc=ok CplD len=1 hdr=4a000001 01a00004 01af0b00 00000000
+     137.241 us RX DLLP ACK seq=14 crc=ok [0000000e7de6]
+     143.641 us RX TLP seq=15 lcrc=ok CfgWr0 len=1 hdr=44000001 01af0c0f 01a00030 ffffffff
+     143.953 us TX DLLP ACK seq=15 crc=ok [0000000fdcfd]
+     144.049 us TX DLLP UpdateFC-NP hdr=20 data=15 crc=ok [9005000f4ba0]
+     144.401 us TX TLP seq=15 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0c00
+     145.305 us RX TLP seq=16 lcrc=ok CfgRd0 len=1 hdr=04000001 01af0d0f 01a00030
+     145.385 us RX DLLP ACK seq=15 crc=ok [0000000fdcfd]
+     145.601 us TX DLLP ACK seq=16 crc=ok [00000010b278]
+     145.697 us TX DLLP UpdateFC-NP hdr=21 data=15 crc=ok [9005400fa7ce]
+     146.049 us TX TLP seq=16 lcrc=ok CplD len=1 hdr=4a000001 01a00004 01af0d00 00000000
+     146.921 us RX DLLP ACK seq=16 crc=ok [00000010b278]
+     153.321 us RX TLP seq=17 lcrc=ok CfgWr0 len=1 hdr=44000001 01af000f 01a00010 00000000
+     153.633 us TX DLLP ACK seq=17 crc=ok [000000111363]
+     153.729 us TX DLLP UpdateFC-NP hdr=22 data=16 crc=ok [90058010fdf8]
+     154.081 us TX TLP seq=17 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0000
+     154.953 us RX DLLP ACK seq=17 crc=ok [000000111363]
+     154.985 us RX TLP seq=18 lcrc=ok CfgWr0 len=1 hdr=44000001 01af010f 01a00014 00000000
+     155.297 us TX DLLP ACK seq=18 crc=ok [00000012f04f]
+     155.393 us TX DLLP UpdateFC-NP hdr=23 data=17 crc=ok [9005c011b08d]
+     155.745 us TX TLP seq=18 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0100
+     156.617 us RX TLP seq=19 lcrc=ok CfgWr0 len=1 hdr=44000001 01af020f 01a00018 00000000
+     156.713 us RX DLLP ACK seq=18 crc=ok [00000012f04f]
+     156.929 us TX DLLP ACK seq=19 crc=ok [000000135154]
+     157.025 us TX DLLP UpdateFC-NP hdr=24 data=18 crc=ok [900600126ab1]
+     157.377 us TX TLP seq=19 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0200
+     157.537 us TX DLLP UpdateFC-P hdr=4 data=32 crc=ok [800100203fd7]
+     157.569 us TX DLLP UpdateFC-NP hdr=24 data=18 crc=ok [900600126ab1]
+     158.249 us RX DLLP ACK seq=19 crc=ok [000000135154]
+     158.281 us RX TLP seq=20 lcrc=ok CfgWr0 len=1 hdr=44000001 01af030f 01a0001c 00000000
+     158.593 us TX DLLP ACK seq=20 crc=ok [000000143616]
+     158.689 us TX DLLP UpdateFC-NP hdr=25 data=19 crc=ok [9006401327c4]
+     159.041 us TX TLP seq=20 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0300
+     159.913 us RX TLP seq=21 lcrc=ok CfgWr0 len=1 hdr=44000001 01af040f 01a00020 00000000
+     160.009 us RX DLLP ACK seq=20 crc=ok [000000143616]
+     160.225 us TX DLLP ACK seq=21 crc=ok [00000015970d]
+     160.321 us TX DLLP UpdateFC-NP hdr=26 data=20 crc=ok [900680147435]
+     160.361 us RX DLLP UpdateFC-P hdr=32 data=437 crc=ok [800801b5a2be]
+     160.425 us RX DLLP UpdateFC-NP hdr=12 data=24 crc=ok [90030018261e]
+     160.673 us TX TLP seq=21 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0400
+     161.545 us RX DLLP ACK seq=21 crc=ok [00000015970d]
+     161.577 us RX TLP seq=22 lcrc=ok CfgWr0 len=1 hdr=44000001 01af050f 01a00024 00000000
+     161.889 us TX DLLP ACK seq=22 crc=ok [000000167421]
+     161.985 us TX DLLP UpdateFC-NP hdr=27 data=21 crc=ok [9006c0153940]
+     162.337 us TX TLP seq=22 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0500
+     163.209 us RX TLP seq=23 lcrc=ok CfgWr0 len=1 hdr=44000001 01af060f 01a00030 00000000
+     163.305 us RX DLLP ACK seq=22 crc=ok [000000167421]
+     163.521 us TX DLLP ACK seq=23 crc=ok [00000017d53a]
+     163.617 us TX DLLP UpdateFC-NP hdr=28 data=22 crc=ok [900700161a21]
+     163.969 us TX TLP seq=23 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0600
+     164.841 us RX DLLP ACK seq=23 crc=ok [00000017d53a]
+     164.873 us RX TLP seq=24 lcrc=ok CfgWr0 len=1 hdr=44000001 01af0701 01a00004 03000000
+     165.185 us TX DLLP ACK seq=24 crc=ok [00000018baa5]
+     165.281 us TX DLLP UpdateFC-NP hdr=29 data=23 crc=ok [900740175754]
+     165.633 us TX TLP seq=24 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0700
+     166.505 us RX TLP seq=25 lcrc=ok CfgWr0 len=1 hdr=44000001 01af0801 01a00068 5f000000
+     166.601 us RX DLLP ACK seq=24 crc=ok [00000018baa5]
+     166.817 us TX DLLP ACK seq=25 crc=ok [000000191bbe]
+     166.913 us TX DLLP UpdateFC-NP hdr=30 data=24 crc=ok [900780180c78]
+     167.265 us TX TLP seq=25 lcrc=ok Cpl len=0 hdr=0a000000 01a00004 01af0800
+     168.137 us RX DLLP ACK seq=25 crc=ok [000000191bbe]
+     181.553 us TX DLLP UpdateFC-P hdr=4 data=32 crc=ok [800100203fd7]
+     181.585 us TX DLLP UpdateFC-NP hdr=30 data=24 crc=ok [900780180c78]
+     182.569 us RX TLP seq=26 lcrc=ok MWr32 len=1 hdr=40000001 01a0090f 00000010 04030201
+     182.761 us RX TLP seq=27 lcrc=ok MRd32 len=1 hdr=00000001 01a00a0f 00000010
+     182.881 us TX DLLP ACK seq=26 crc=ok [0000001af892]
+     182.977 us TX DLLP UpdateFC-P hdr=5 data=33 crc=ok [8001402172a2]
+     183.057 us TX DLLP ACK seq=27 crc=ok [0000001b5989]
+     183.153 us TX DLLP UpdateFC-NP hdr=31 data=24 crc=ok [9007c018e016]
+     183.473 us TX TLP seq=26 lcrc=ok CplD len=1 hdr=4a000001 01a00004 01a00a10 04030201
+     184.377 us RX DLLP ACK seq=26 crc=ok [0000001af892]

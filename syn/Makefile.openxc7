@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: CERN-OHL-P
+# pci_eerie: openXC7 (yosys + nextpnr-xilinx) build of a pcie_7x board top with pci_eerie in
+# place of PCIE_2_1.  Run from the repository root, e.g.
+#   docker run --rm -u $(id -u):$(id -g) -v $PWD:/mnt regymm/openxc7:timecardflex make -C /mnt -f syn/Makefile.openxc7 [BOARD=..]
+# pcie_7x comes from the ext/pcie_7x submodule (PCIE_7X=<path inside the container> to override).
+# The nextpnr chip database is generated into syn/chipdb on the first run (CHIPDB to override).
+#   BOARD=ac7100b     Alinx AC7100B (xc7a100t, GTP), Gen1   (default)
+#   BOARD=ypcb_k480t  YPCB K480T (xc7k480t, GTX), Gen1, top syn/top_ypcb_k480t.v
+#     regymm/openxc7:timecardflex's prjxray-db has no frame addresses for the xc7k480t GT tiles, so
+#     run the bitstream steps (target .../top.bit) in an image whose db has them, e.g.
+#     openxc7-stable-202608, after the timecardflex run stops at top.frames
+BOARD    ?= ac7100b
+# extra yosys hierarchy parameters, e.g. TOP_PARAMS="-chparam NO_RESET 1"
+TOP_PARAMS ?=
+DB_DIR   ?= /nextpnr-xilinx/xilinx/external/prjxray-db
+CHIPDB   ?= $(CURDIR)/syn/chipdb
+PCIE_7X  ?= ext/pcie_7x
+SRC      := $(PCIE_7X)/src
+ifeq ($(BOARD),ypcb_k480t)
+CHIPFAM  := kintex7
+PART     := xc7k480tffg1156-2
+TOP      := top_ypcb_k480t
+BUILDDIR ?= syn/build_openxc7_ypcb_k480t
+XDC      := syn/ypcb_k480t_pins.xdc
+BOARD_SRC := $(SRC)/pipe_wrapper_gtx.v syn/top_ypcb_k480t.v
+else
+CHIPFAM  := artix7
+PART     := xc7a100tfgg484-1
+TOP      := pcie_7x_top_aximm
+BUILDDIR ?= syn/build_openxc7
+XDC      := $(PCIE_7X)/pcie_7x_ac7100b.xdc
+BOARD_SRC := $(SRC)/pipe_wrapper.v
+endif
+SOURCES  := $(SRC)/xilinx_pcie_mmcm.v $(SRC)/axil_to_al.v $(SRC)/axis_pcie_to_al_us.v $(SRC)/pcie_7x.v \
+            $(SRC)/pcie_axi_rx.v $(SRC)/pcie_axi_tx.v $(SRC)/pcie_brams.v $(SRC)/pcie_tx_thrtl_ctl.v \
+            $(BOARD_SRC) $(SRC)/aximm-minimal/pcie_7x_top_aximm.v $(SRC)/aximm-minimal/axil_minimum.v \
+            integration/pcie_block.v $(addprefix rtl/,$(shell cat rtl/files.f))
+LOGFILE  := $(BUILDDIR)/top.log
+# nextpnr-xilinx does not pick up the clocks of the board XDC: constrain for the 125 MHz
+# PIPE clock of a 2.5 GT/s link so placement and routing are timing driven
+# (--freq applies to every clock; the Gen1 user clock only needs 62.5 MHz, so a user_clk
+# "FAIL at 125 MHz" is expected: --timing-allow-fail keeps it from aborting, check top.log)
+NEXTPNR_FLAGS ?= --freq 125 --timing-allow-fail
+
+all: $(BUILDDIR)/top.bit
+
+$(BUILDDIR):
+	mkdir -p $(BUILDDIR)
+
+# -defer: elaborate only what the top instantiates (pcie_7x has GTP and GTX branches)
+$(BUILDDIR)/top.json: $(SOURCES) | $(BUILDDIR)
+	yosys -p "read_verilog -defer -Irtl $(SOURCES); hierarchy -top $(TOP) $(TOP_PARAMS); synth_xilinx -flatten -abc9 -arch xc7 -top $(TOP); write_json $@" > $(LOGFILE) 2>&1
+
+# chip database for this nextpnr-xilinx build (generated once)
+$(CHIPDB)/$(PART).bin:
+	mkdir -p $(CHIPDB)
+	pypy3 /nextpnr-xilinx/xilinx/python/bbaexport.py --device $(PART) --bba $(CHIPDB)/$(PART).bba
+	bbasm -l $(CHIPDB)/$(PART).bba $@
+	rm -f $(CHIPDB)/$(PART).bba
+
+$(BUILDDIR)/top.fasm: $(BUILDDIR)/top.json $(CHIPDB)/$(PART).bin
+	nextpnr-xilinx $(NEXTPNR_FLAGS) --chipdb $(CHIPDB)/$(PART).bin --xdc $(XDC) --json $< --fasm $@ >> $(LOGFILE) 2>&1
+
+# canonical FASM (one line per set bit) works around fasm parsers that mishandle NAME[hi:lo] = value
+$(BUILDDIR)/top.canon.fasm: $(BUILDDIR)/top.fasm
+	python3 tools/fasm_canon.py $< > $@
+
+$(BUILDDIR)/top.frames: $(BUILDDIR)/top.canon.fasm
+	fasm2frames --part $(PART) --db-root $(DB_DIR)/$(CHIPFAM) $< > $@
+
+$(BUILDDIR)/top.bit: $(BUILDDIR)/top.frames
+	xc7frames2bit --part_file $(DB_DIR)/$(CHIPFAM)/$(PART)/part.yaml --part_name $(PART) --frm_file $< --output_file $@ >> $(LOGFILE) 2>&1
+
+clean:
+	rm -rf $(BUILDDIR)

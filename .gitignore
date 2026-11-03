@@ -1,0 +1,12 @@
+# simulation and implementation outputs
+sim/build_*/
+sim/*.out
+syn/build_*/
+syn/chipdb/
+syn/*.log
+syn/*.out
+syn/*.jou
+.Xil/
+__pycache__/
+*.pyc
+abc.history
