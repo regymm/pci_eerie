@@ -166,8 +166,17 @@ GEN2=1 sim/run.sh eerie ...                 # both link partners 5.0 GT/s capabl
 APP=1  sim/run.sh eerie eerie_mem_test      # endpoint with the testbench memory application
 sim/run.sh eerie eerie_stress_test -testplusarg inject_rx_tlp=12 -testplusarg inject_tx_tlp=9
 python3 tools/pipe_decode.py sim/build_eerie/pipe.log | less
-sim/regress.sh "pio_writeReadBack_test0" "GEN2=1 pio_writeReadBack_test0" "APP=1 eerie_mem_test"
+sim/regress.sh                              # full regression (the 9 runs in the Status table)
+sim/regress.sh "GEN2=1 pio_writeReadBack_test0" "APP=1 eerie_mem_test"   # chosen runs
 ```
+
+Each run takes about 10-30 minutes (Vivado 2023.2 xsim, GTX model on both sides); the Gen2
+stress test is the longest. `eerie_mem_test` and `eerie_int_test` need `APP=1`: they use the
+testbench memory application (tb/eerie_tb_ep.v), which also implements the interrupt trigger at
+BAR0 + 0xFF0. Without it `eerie_int_test` waits for an MSI that never comes and fails.
+Every run prints "Check Device/Vendor ID - FAILED" / "SYSTEM CHECK FAILED" from the stock
+system check, which expects the example design's IDs; the result is the
+"Test Completed Successfully" / "TEST FAILED" line at the end.
 
 Plusargs: `pipe_log` (PIPE symbol log), `pipe_ctl` (PIPE control signal changes),
 `dll_mon` (DLL/TL internal events), `rp_mon_verbose` (every TLP seen by the root port),
