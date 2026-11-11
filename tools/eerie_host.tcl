@@ -5,6 +5,7 @@
 # enum / regtest read and write its NVMe registers.
 # usage: vivado -mode batch -source tools/eerie_host.tcl -tclargs <cable serial|-> <command> [args]
 #   commands: status          link / LTSSM / clocks
+#             gt              GT wrapper reset state (phy_rdy_n, reset FSMs, PLL locks)
 #             pipe            per-lane PIPE receive / receiver detection status (sticky)
 #             trace [clear]   LTSSM state changes since the last clear (64 kept), highest state
 #             clocks          sample the user clock and 50 MHz heartbeats (is the reference clock there?)
@@ -51,6 +52,8 @@ proc rd {addr} {
     if {[lindex $r 1] == $c0} { error [format "register read 0x%04x not acknowledged (user clock not running?)" $addr] }
     return [lindex $r 0]
 }
+# 4-bit binary string (Tcl 8.5 has no %b)
+proc bits4 {v} { return "[expr {($v>>3)&1}][expr {($v>>2)&1}][expr {($v>>1)&1}][expr {$v&1}]" }
 proc ctl {v} { dr 1 1 0xFFFF $v }
 proc aux {} { return [lindex [dr 0 0 0 0] 2] }
 
@@ -182,6 +185,10 @@ proc cfgwrv {reg v} { cfgwr [bdf 01:00.0] $reg [regv $v] }
 jtag_open $serial
 switch $cmd {
     status { status }
+    gt     { set a [rd 0x0306]; set b [rd 0x0307]
+             puts [format "GT wrapper: phy_rdy_n %d, rst_idle %d, rst_fsm 0x%02x, rate_idle %d" [expr {$a & 1}] [expr {($a >> 1) & 1}] [expr {($a >> 2) & 0x1F}] [expr {($a >> 19) & 1}]]
+             puts [format "  per lane 3..0: cpll_lock %s, rxpmaresetdone %s, txphinitdone %s" [bits4 [expr {$a >> 7}]] [bits4 [expr {$a >> 11}]] [bits4 [expr {$a >> 15}]]]
+             puts [format "  lane 0: drp_fsm 0x%02x, sync_fsm_tx 0x%02x, rate_fsm 0x%02x" [expr {$b & 0x7F}] [expr {($b >> 7) & 0x3F}] [expr {($b >> 13) & 0x1F}]] }
     regtest { # MWr/MRd read-back on the NVMe admin queue base registers (ASQ 0x28, ACQ 0x30; bits 11:0
               # read as zero), controller disabled; BAR0 at 0x10000000 as set by enum
               set n [expr {[llength $args] ? [lindex $args 0] : 20}]; set bad 0; expr {srand(1)}

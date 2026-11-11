@@ -11,6 +11,7 @@
 //   0x0301         R   free-running user_clk counter
 //   0x0303         R   LTSSM trace: [5:0] entries written (64 max, then stops), [13:8] highest state seen
 //   0x0304/0x0305  R   pci_eerie DBGVECA[31:0] / [49:32] (PIPE detect / receive status, see pci_eerie.v)
+//   0x0306/0x0307  R   GT wrapper reset state [24:0] / [49:25] (see syn/core_rp_dbg.sed)
 //   0x2000-0x203F  R   LTSSM trace entries: [5:0] state entered, [31:8] user_clk counter / 64 at entry
 //                      (cleared by writing 0x0303)
 //   0x0302         R/W PL control: [1:0] directed_link_change, [3:2] directed_link_width,
@@ -54,6 +55,7 @@ module eerie_host_app (
     // status / PL control
     input      [31:0] status,
     input      [49:0] dbg,      // bring-up status from pci_eerie (other clock, quasi-static)
+    input      [49:0] gtdbg,    // GT wrapper reset state (other clocks, quasi-static)
     output reg [6:0]  pl_ctl
 );
     // ---------------------------------------------------------------- TX
@@ -159,6 +161,8 @@ module eerie_host_app (
     end
     (* ASYNC_REG = "TRUE" *) reg [49:0] dbg_s1, dbg_s2;
     always @(posedge clk) begin dbg_s1 <= dbg; dbg_s2 <= dbg_s1; end
+    (* ASYNC_REG = "TRUE" *) reg [49:0] gt_s1, gt_s2;
+    always @(posedge clk) begin gt_s1 <= gtdbg; gt_s2 <= gt_s1; end
     reg [31:0] tr_q;
     always @(posedge clk) tr_q <= tr[addr[5:0]];
 
@@ -179,6 +183,8 @@ module eerie_host_app (
             16'h0303: rdata <= {18'd0, tr_max, 1'b0, tr_n};
             16'h0304: rdata <= dbg_s2[31:0];
             16'h0305: rdata <= {14'd0, dbg_s2[49:32]};
+            16'h0306: rdata <= {7'd0, gt_s2[24:0]};
+            16'h0307: rdata <= {7'd0, gt_s2[49:25]};
             16'h0402: rdata <= {30'd0, cm_to, cm_busy};
             16'h0403: rdata <= cm_do;
             16'b0001_00??_????_????: rdata <= addr_q[0] ? rx_hi_q : rx_lo_q;

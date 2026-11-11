@@ -31,15 +31,9 @@ proc vivado_core {kind} {
   } else { set o pcie_2_1_rport_7x_eerie.v }
   exec sed -E $e $ex/pcie_2_1_rport_7x.v > $here/build_core_gen/$o
   if {$kind eq "rp"} {
-    # bring pci_eerie's DBGVECA[49:0] (bring-up status) out of the core top through the unused
-    # pipe_tx_0_sigs / pipe_tx_1_sigs outputs (top module only, i.e. before the first endmodule)
-    exec sed -E -i {1,/^endmodule/ {
-      s/^  rp_pcie_top # \(/  wire [63:0] dbg_vec_a_w;\n  rp_pcie_top # (/
-      s/^(\s*)\.dbg_vec_a(\s*)\( \),/\1.dbg_vec_a\2( dbg_vec_a_w ),/
-      s/^(\s*)assign  pipe_tx_0_sigs      = 25'b0;/\1assign  pipe_tx_0_sigs      = dbg_vec_a_w[24:0];/
-      s/^(\s*)assign  pipe_tx_1_sigs      = 25'b0;/\1assign  pipe_tx_1_sigs      = dbg_vec_a_w[49:25];/
-    }} $here/build_core_gen/$o
-    if {[exec grep -c {dbg_vec_a_w} $here/build_core_gen/$o] != 6} { error "DBGVECA export patch did not apply" }
+    # bring-up status out of the core top (syn/core_rp_dbg.sed)
+    exec sed -E -i -f $here/core_rp_dbg.sed $here/build_core_gen/$o
+    if {[exec grep -c {dbg_vec_a_w\|dbg_rst_fsm} $here/build_core_gen/$o] < 8} { error "core_rp_dbg.sed did not apply" }
   }
   if {[exec grep -c {^\s*pci_eerie #(} $here/build_core_gen/$o] != 1} { error "PCIE_2_1 instance not found in $o" }
   return [list $here/build_core_gen/$o]

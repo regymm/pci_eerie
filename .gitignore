@@ -11,3 +11,4 @@ __pycache__/
 *.pyc
 abc.history
 tb/unit/build_*/
+syn/fasmdiff/

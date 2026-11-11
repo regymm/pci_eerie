@@ -40,6 +40,7 @@ module eerie_host_rp #(
     wire [2:0]  init_width;
     wire [15:0] cfg_lstatus;
     wire [49:0] dbg;            // pci_eerie DBGVECA (pclk), when the core export patch is applied
+    wire [49:0] gtdbg;          // GT wrapper reset state (syn/core_rp_dbg.sed)
     wire        msg_rx;
     reg  [7:0]  msg_cnt;
     always @(posedge user_clk) if (user_reset) msg_cnt <= 8'd0; else if (msg_rx) msg_cnt <= msg_cnt + 1'b1;
@@ -118,8 +119,8 @@ module eerie_host_rp #(
         .cfg_aer_ecrc_check_en(), .cfg_aer_ecrc_gen_en(), .cfg_vc_tcvc_map(),
         .common_commands_in(12'b0), .pipe_rx_0_sigs(25'b0), .pipe_rx_1_sigs(25'b0), .pipe_rx_2_sigs(25'b0),
         .pipe_rx_3_sigs(25'b0), .pipe_rx_4_sigs(25'b0), .pipe_rx_5_sigs(25'b0), .pipe_rx_6_sigs(25'b0),
-        .pipe_rx_7_sigs(25'b0), .common_commands_out(), .pipe_tx_0_sigs(dbg[24:0]), .pipe_tx_1_sigs(dbg[49:25]), .pipe_tx_2_sigs(),
-        .pipe_tx_3_sigs(), .pipe_tx_4_sigs(), .pipe_tx_5_sigs(), .pipe_tx_6_sigs(), .pipe_tx_7_sigs(),
+        .pipe_rx_7_sigs(25'b0), .common_commands_out(), .pipe_tx_0_sigs(dbg[24:0]), .pipe_tx_1_sigs(dbg[49:25]), .pipe_tx_2_sigs(gtdbg[24:0]),
+        .pipe_tx_3_sigs(gtdbg[49:25]), .pipe_tx_4_sigs(), .pipe_tx_5_sigs(), .pipe_tx_6_sigs(), .pipe_tx_7_sigs(),
         .pipe_mmcm_rst_n(1'b1), .sys_clk(sys_clk), .sys_rst_n(sys_rst_n)
     );
 
@@ -132,6 +133,6 @@ module eerie_host_rp #(
         .m_axis_rx_tvalid(m_axis_rx_tvalid), .m_axis_rx_tuser(m_axis_rx_tuser),
         .cfg_mgmt_dwaddr(cfg_mgmt_dwaddr), .cfg_mgmt_di(cfg_mgmt_di), .cfg_mgmt_byte_en(cfg_mgmt_byte_en),
         .cfg_mgmt_rd_en(cfg_mgmt_rd_en), .cfg_mgmt_wr_en(cfg_mgmt_wr_en), .cfg_mgmt_do(cfg_mgmt_do),
-        .cfg_mgmt_rd_wr_done(cfg_mgmt_rd_wr_done), .status(status), .dbg(dbg), .pl_ctl(pl_ctl)
+        .cfg_mgmt_rd_wr_done(cfg_mgmt_rd_wr_done), .status(status), .dbg(dbg), .gtdbg(gtdbg), .pl_ctl(pl_ctl)
     );
 endmodule

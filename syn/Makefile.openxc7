@@ -9,12 +9,16 @@
 #   BOARD=ac7100b_x4  Time Card (AC7100B), x4 Gen1: the Vivado 7-series core of the root port
 #                     example (from PCIE_EX, path inside the container) with pci_eerie, as
 #                     vivado_impl.tcl ac7100b_x4; top syn/top_ac7100b_x4.v
+#   BOARD=ypcb_k480t_rp  YPCB K480T root port, x4 (Gen1 by default), PUZHI PZ-SSD lane order, Vivado
+#                     core from PCIE_EX as BOARD=ac7100b_x4; bitstream steps as BOARD=ypcb_k480t
 #   BOARD=ypcb_k480t  YPCB K480T (xc7k480t, GTX), Gen1, top syn/top_ypcb_k480t.v
 #     regymm/openxc7:timecardflex's prjxray-db has no frame addresses for the xc7k480t GT tiles, so
 #     run the bitstream steps (target .../top.bit) in an image whose db has them, e.g.
 #     openxc7-stable-202608, after the timecardflex run stops at top.frames
 BOARD    ?= ac7100b
 .DEFAULT_GOAL := all
+# a failed step (e.g. fasm2frames writing into a redirect) must not leave a partial target behind
+.DELETE_ON_ERROR:
 # extra yosys hierarchy parameters, e.g. TOP_PARAMS="-chparam NO_RESET 1"
 TOP_PARAMS ?=
 # extra synth_xilinx options
@@ -37,6 +41,15 @@ TOP      := top_ac7100b_x4
 BUILDDIR ?= syn/build_openxc7_ac7100b_x4
 XDC      := syn/ac7100b_x4_pins.xdc
 # nextpnr-xilinx cannot route the SRLC32E cascade output (Q31) yosys uses in the core
+SYNTH_FLAGS += -nosrl
+else ifeq ($(BOARD),ypcb_k480t_rp)
+CHIPFAM  := kintex7
+PART     := xc7k480tffg1156-2
+TOP      := top_ypcb_k480t_rp
+BUILDDIR ?= syn/build_openxc7_ypcb_k480t_rp
+XDC      := syn/ypcb_k480t_rp_pzssd_pins.xdc
+# Gen1 unless overridden (TOP_PARAMS="-chparam ENABLE_GEN2 1")
+TOP_PARAMS := $(if $(TOP_PARAMS),$(TOP_PARAMS),-chparam ENABLE_GEN2 0)
 SYNTH_FLAGS += -nosrl
 else ifeq ($(BOARD),ac7100b_msi)
 CHIPFAM  := artix7
@@ -70,6 +83,27 @@ $(CORE_EP): $(PCIE_EX)/pcie_2_1_rport_7x.v | $(BUILDDIR)
 	# nextpnr-xilinx rejects TXPI_SYNFREQ_PPM = 0 (the TX phase interpolator is unused): 1, as pcie_7x
 	sed -E -i '/GTPE2_CHANNEL #/,/^\s*\)/ s|//(\.TXPI_SYNFREQ_PPM\s*)\( *3.d0\)|\1( 3'"'"'d1)|' $@
 	grep -q "^\s*\.TXPI_SYNFREQ_PPM *( 3'd1)" $@
+else ifeq ($(BOARD),ypcb_k480t_rp)
+# Vivado root port core with pci_eerie, as vivado_impl.tcl's vivado_core rp (incl. the DBGVECA
+# export through pipe_tx_0/1_sigs), its pcie_bram_7x replaced by syn/oxc_pcie_bram_7x.v (renamed rp_)
+PCIE_EX  ?= ../pcie_7x_0_ex/imports
+CORE_RP  := $(BUILDDIR)/pcie_2_1_rport_7x_eerie.v
+BRAM_RP  := $(BUILDDIR)/oxc_pcie_bram_7x_rp.v
+SOURCES  := $(CORE_RP) $(BRAM_RP) syn/eerie_host_app.v syn/eerie_host_rp.v syn/top_ypcb_k480t_rp.v \
+            $(addprefix rtl/,$(shell cat rtl/files.f))
+$(BRAM_RP): syn/oxc_pcie_bram_7x.v | $(BUILDDIR)
+	sed 's/\bep_pcie_bram_7x\b/rp_pcie_bram_7x/' $< > $@
+$(CORE_RP): $(PCIE_EX)/pcie_2_1_rport_7x.v syn/core_rp_dbg.sed syn/core_oxc_gtx.sed | $(BUILDDIR)
+	sed -E 's/^(\s*)PCIE_2_1 #\(  \/\/ Verilog-2001/\1pci_eerie #(/; s/^module rp_pcie_bram_7x$$/module rp_pcie_bram_7x_vivado/' $< > $@
+	test "$$(grep -c '^\s*pci_eerie #(' $@)" = 1
+	sed -E -i -f syn/core_rp_dbg.sed $@
+	# GTXE2_CHANNEL attributes the core leaves at their (unwritten) defaults (syn/core_oxc_gtx.sed)
+	sed -E -i -f syn/core_oxc_gtx.sed $@
+	grep -q "^\s*\.CPLL_INIT_CFG" $@
+	grep -q "gt_cpllpdrefclk = 1.b0" $@
+	test "$$(grep -c 'dbg_vec_a_w\|dbg_rst_fsm' $@)" -ge 8
+	# unused GT(X/P)E2_COMMON reference clock inputs left open (nextpnr-xilinx: IBUFDS_GTE2 or nothing)
+	sed -E -i '/GT[XP]E2_COMMON #/,/^\s*\);/ s/\.(GTGREFCLK[01]?|GTREFCLK1|GTEASTREFCLK[01]|GTWESTREFCLK[01]|GTNORTHREFCLK[01]|GTSOUTHREFCLK[01])(\s*)\( *1.d0\)/.\1\2()/' $@
 else
 SOURCES  := $(SRC)/xilinx_pcie_mmcm.v $(SRC)/axil_to_al.v $(SRC)/axis_pcie_to_al_us.v $(SRC)/pcie_7x.v \
             $(SRC)/pcie_axi_rx.v $(SRC)/pcie_axi_tx.v $(SRC)/pcie_brams.v $(SRC)/pcie_tx_thrtl_ctl.v \

@@ -193,6 +193,20 @@ misses by 0.94 ns (the multi-lane receive framing's LCRC state loop, deskew, and
 Vivado core's PIPE lanes), so the 5.0 GT/s build is not timing-clean although it ran without errors
 on the bench; the Gen1 builds meet timing.
 
+openXC7 root port (`syn/Makefile.openxc7 BOARD=ypcb_k480t_rp`, Gen1 by default; add
+`BUILDDIR=... TOP_PARAMS="-chparam ENABLE_GEN2 0 -chparam LANES 2 -chparam UCF 1"` for the x2 build;
+synthesis / place and route in regymm/openxc7:timecardflex, `top.bit` in openxc7-stable-202608, whose
+prjxray-db has the GTX CPLL / GTREFCLK bit fixes): builds, and on the card the CPLLs lock, the GT reset
+sequence completes, the SSD's receivers are detected and its TS1s are received (Polling.Active is
+left after the 1024 TS1), but the link stops in Polling.Configuration (no TS2 from the SSD, so it
+apparently does not receive ours) and returns to Detect after 48 ms. Changes the Vivado core needed
+for openXC7 (`syn/core_oxc_gtx.sed`): GTXE2_CHANNEL attributes the core leaves at their defaults are
+set explicitly (the openXC7 flow writes unset attributes as 0), including TXPHDLY_CFG; the CPLL
+power-down override and its BUFG on the reference clock are removed (with them the CPLLs do not
+lock). With these, prjxray's bit2fasm shows the same GTX channel configuration as the Vivado
+bitstream; what remains is in the fabric (nextpnr estimates 128 MHz PIPE clock for the x2 build).
+`tools/eerie_host.tcl gt` reads the GT wrapper's reset state (`syn/core_rp_dbg.sed`).
+
 Timing (Vivado 2023.2, the pcie_7x board top with pci_eerie, `syn/vivado_impl.tcl`):
 
 | Board / part                           | PIPE clock            | user clock          |
