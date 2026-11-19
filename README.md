@@ -1,10 +1,16 @@
 # pci_eerie
 
-![pci_eerie as a PCIe host: K480T root port and Intel Optane on an M.2 adapter](doc/setup_k480t_optane.jpg)
+<p align="center">
+  <img src="doc/setup_k480t_optane.jpg" width="49%" alt="pci_eerie as a PCIe host: K480T root port and Intel Optane on an M.2 adapter">
+  <img src="doc/ecp5_cm5_lspci.jpg" width="49%" alt="pci_eerie on Lattice ECP5: endpoint enumerated by a Raspberry Pi CM5">
+</p>
 
-*The PCIe host (root port) setup: a Kintex-7 480T card (YPCB) running pci_eerie as a Gen2 x2 root
+*Left: the PCIe host (root port) setup: a Kintex-7 480T card (YPCB) running pci_eerie as a Gen2 x2 root
 port in a PUZHI PZ-SSD x8-to-M.2 adapter with an Intel Optane NVMe SSD; it enumerates the SSD and
-reads/writes its NVMe registers, driven over JTAG (see "Root port on hardware" below).*
+reads/writes its NVMe registers, driven over JTAG (see "Root port on hardware" below).
+Right: pci_eerie ported to Lattice ECP5 by goran-mahovlic: an ECP5 endpoint (Radiona ULX4M-LD on a PCIe
+carrier) enumerated by a Raspberry Pi CM5 (`lspci`: `0001:01:00.0 ... Lattice Semiconductor Corporation`;
+see [issue #1](https://github.com/regymm/pci_eerie/issues/1)).*
 
 An open-source soft PCI Express endpoint and root port for Xilinx 7-series FPGAs, written in plain
 Verilog-2005 (synthesizes with Vivado and with yosys/openXC7).
@@ -16,6 +22,11 @@ generated from the unisim model). A design that instantiates `PCIE_2_1` (for exa
 soft core by renaming the module of that instance. Nothing else changes: the GT/PIPE
 wrapper, clocking, the TX/RX buffer BRAMs on the MIM ports, and the AXI↔TRN bridges all
 stay as they are.
+
+Ports to other FPGAs: pci_eerie has been ported to and works on Lattice ECP5
+([issue #1](https://github.com/regymm/pci_eerie/issues/1), code in the
+[ecp5-ld branch of goran-mahovlic/pci_eerie](https://github.com/goran-mahovlic/pci_eerie/tree/ecp5-ld));
+a GateMate port is in progress.
 
 Scope: endpoint or root port (selected like on `PCIE_2_1`, by `PCIE_CAP_DEVICE_PORT_TYPE`
 0 or 4), x1, x2 and x4 links (`LINK_CAP_MAX_LINK_WIDTH` 1, 2, 4; an x8 build trains to x4 so far),
@@ -303,7 +314,7 @@ tools/fasm_canon.py  FASM canonicalizer used by the openXC7 flow
 tools/prog.tcl       JTAG programming (Vivado; selects the cable by serial)
 tools/eerie_host.tcl JTAG control of the root port test design (raw JTAG, BSCANE2 USER1)
 ext/pcie_7x          pcie_7x (git submodule)
-doc/                 photo of the PCIe host test setup (setup_k480t_optane.jpg)
+doc/                 photos: PCIe host test setup (setup_k480t_optane.jpg), ECP5 port (ecp5_cm5_lspci.jpg)
 ```
 
 `integration/pcie_block.v`, `tb/board.v` and `tb/pci_exp_usrapp_tx.v` are modified Xilinx
